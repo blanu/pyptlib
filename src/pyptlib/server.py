@@ -8,43 +8,43 @@ class ServerConfig(Config):
     Config.__init__(self)
     
   # Returns a tuple (str,int) representing the address of the Tor server port as reported by Tor
-  def getExtendedServerPort():
+  def getExtendedServerPort(self):
     return extendedServerPort
     
   # Returns a tuple (str,int) representing the address of the Tor OR port as reported by Tor
-  def getORPort():
+  def getORPort(self):
     return ORPort
     
   # Returns a dict {str: (str,int)} representing the addresses for each transport as reported by Tor
-  def getServerBindAddresses():
+  def getServerBindAddresses(self):
     return serverBindAddr
     
   # Returns a list of strings representing the server transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True.
-  def getServerTransports():
+  def getServerTransports(self):
     return serverTransports
 
   # Write a message to stdout specifying that an error parsing the environment variables has occurred
   # Takes: str
-  def writeEnvError(message): # ENV-ERROR
+  def writeEnvError(self, message): # ENV-ERROR
     pass
 
   # Write a message to stdout specifying that the specified configuration protocol version is supported   
   # Takes: str
-  def writeVersion(version): # VERSION
+  def writeVersion(self, version): # VERSION
     pass
     
   # Write a message to stdout specifying a supported transport
   # Takes: str, (str, int), MethodOptions
-  def writeMethod(name, address, options): # SMETHOD
+  def writeMethod(self, name, address, options): # SMETHOD
     pass
     
   # Write a message to stdout specifying that an error occurred setting up the specified method
   # Takes: str, str
-  def writeMethodError(name, message): # SMETHOD-ERROR
+  def writeMethodError(self, name, message): # SMETHOD-ERROR
     pass    
     
   # Write a message to stdout specifying that the list of supported transports has ended
-  def writeMethodEnd() # SMETHODS DONE
+  def writeMethodEnd(self) # SMETHODS DONE
     pass
 
 class MethodOptions:
@@ -57,17 +57,17 @@ class MethodOptions:
     pass
 
   # Sets forward to True    
-  def setForward()
+  def setForward(self)
     pass
   
   # Adds a key-value pair to args
-  def addArg(key, value):
+  def addArg(self, key, value):
     pass
 
   # Adds a key-value pair to declare    
-  def addDeclare(key, value):
+  def addDeclare(self, key, value):
     pass
     
   # Sets useExtendedPort to True
-  def setUserExtendedPort()
+  def setUserExtendedPort(self)
     pass
