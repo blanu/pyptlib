@@ -2,6 +2,12 @@ import os
 
 from config import Config
 
+"""
+Configuration for a Pluggable Transport server.
+"""
+
+__docformat__ = 'restructuredtext'
+
 class ServerConfig(Config):
   extendedServerPort=None # TOR_PT_EXTENDED_SERVER_PORT
   ORPort=None             # TOR_PT_ORPORT

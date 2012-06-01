@@ -2,6 +2,13 @@ import os
 
 from config import Config
 
+"""
+Configuration for a Pluggable Transport client.
+"""
+
+__docformat__ = 'restructuredtext'
+
+
 class ClientConfig(Config):
   clientTransports=[] # TOR_PT_CLIENT_TRANSPORTS
   

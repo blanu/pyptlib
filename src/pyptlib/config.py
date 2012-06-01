@@ -1,5 +1,11 @@
 import os
 
+"""
+Comment
+"""
+
+__docformat__ = 'restructuredtext'
+
 class Config:
   stateLocation=None     # TOR_PT_STATE_LOCATION
   managedTransportVer=[] # TOR_PT_MANAGED_TRANSPORT_VER
