@@ -17,15 +17,15 @@ class ServerConfig(Config):
   def __init__(self): # throws EnvError
     Config.__init__(self)
     
-    extendedServerPort=get('TOR_PT_EXTENDED_SERVER_PORT')
-    ORPort=get('TOR_PT_ORPORT')
+    extendedServerPort=self.get('TOR_PT_EXTENDED_SERVER_PORT')
+    ORPort=self.get('TOR_PT_ORPORT')
     
-    binds=get('TOR_PT_SERVER_BINADDR').split(',')
+    binds=self.get('TOR_PT_SERVER_BINADDR').split(',')
     for bind in binds:
       key,value=bind.split(',')
       serverBindAddr[key]=value
     
-    serverTransports=get('TOR_PT_SERVER_TRANSPORTS').split(',')
+    serverTransports=self.get('TOR_PT_SERVER_TRANSPORTS').split(',')
     
   # Returns a tuple (str,int) representing the address of the Tor server port as reported by Tor
   def getExtendedServerPort(self):

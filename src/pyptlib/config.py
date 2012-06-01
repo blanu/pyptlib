@@ -1,7 +1,7 @@
 import os
 
 """
-Comment
+The base class for the client and server config classes. This class should not be used directly. Instead, use pyptlib.client or pyptlib.server.
 """
 
 __docformat__ = 'restructuredtext'
@@ -12,8 +12,8 @@ class Config:
   allTransportsEnabled=False
   
   def __init__(self): # throws EnvError
-    stateLocation=get('TOR_PT_STATE_LOCATION')
-    managedTransportVer=get('TOR_PT_MANAGED_TRANSPORT_VER').split(',')
+    stateLocation=self.get('TOR_PT_STATE_LOCATION')
+    managedTransportVer=self.get('TOR_PT_MANAGED_TRANSPORT_VER').split(',')
     if '*' in managedTransportVer:
       allTransportsEnabled=True
       managedTransportVer.remove('*')      

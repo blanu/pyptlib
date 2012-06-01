@@ -15,7 +15,7 @@ class ClientConfig(Config):
   def __init__(self): # throws EnvError
     Config.__init__(self)
     
-    clientTransports=get('TOR_PT_CLIENT_TRANSPORTS').split(',')
+    clientTransports=self.get('TOR_PT_CLIENT_TRANSPORTS').split(',')
     
   # Returns a list of strings representing the client transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True.
   def getClientTransports(self):
