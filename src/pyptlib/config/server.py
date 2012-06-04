@@ -14,6 +14,8 @@ class ServerConfig(Config):
   serverBindAddr={}       # TOR_PT_SERVER_BINADDR
   serverTransports=[]     # TOR_PT_SERVER_TRANSPORTS
   
+  #Public methods
+  
   def __init__(self): # throws EnvError
     Config.__init__(self)
     
@@ -66,6 +68,8 @@ class MethodOptions:
   declare={}            # DECLARE
   useExtendedPort=False # USE-EXTENDED-PORT
 
+  #Public methods
+  
   def __init__(self):
     pass
 

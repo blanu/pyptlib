@@ -11,19 +11,15 @@ class Config:
   managedTransportVer=[] # TOR_PT_MANAGED_TRANSPORT_VER
   allTransportsEnabled=False
   
+  #Public methods
+  
   def __init__(self): # throws EnvError
     stateLocation=self.get('TOR_PT_STATE_LOCATION')
     managedTransportVer=self.get('TOR_PT_MANAGED_TRANSPORT_VER').split(',')
     if '*' in managedTransportVer:
       allTransportsEnabled=True
       managedTransportVer.remove('*')      
-    
-  def get(self, key):
-    if key in os.environ:
-      return os.environ[key]
-    else:
-      raise EnvException()
-    
+        
   # Returns a string representing the path to the state storage directory (which may not exist, but should be creatable) reported by Tor
   def getStateLocation(self):
     return stateLocation
@@ -54,6 +50,14 @@ class Config:
   # Write a message to stdout specifying that none of the specified configuration protocol versions are supported
   def writeVersionError(self): # VERSION-ERROR
     print('VERSION-ERROR no-version')
+    
+ # Private methods
+ 
+  def get(self, key):
+    if key in os.environ:
+      return os.environ[key]
+    else:
+      raise EnvException()    
 
 # Exception thrown when there is an error parsing the configuration parameters provided by Tor in environment variables    
 class EnvException(Exception):

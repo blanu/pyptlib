@@ -12,6 +12,8 @@ __docformat__ = 'restructuredtext'
 class ClientConfig(Config):
   clientTransports=[] # TOR_PT_CLIENT_TRANSPORTS
   
+  #Public methods
+  
   def __init__(self): # throws EnvError
     Config.__init__(self)
     
