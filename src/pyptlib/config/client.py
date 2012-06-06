@@ -8,35 +8,35 @@ Configuration for a Pluggable Transport client.
 
 __docformat__ = 'restructuredtext'
 
-
-class ClientConfig(Config):
-  clientTransports=[] # TOR_PT_CLIENT_TRANSPORTS
-  
+class ClientConfig(Config):  
   #Public methods
   
   def __init__(self): # throws EnvError
     Config.__init__(self)
     
-    clientTransports=self.get('TOR_PT_CLIENT_TRANSPORTS').split(',')
-    
+    transports=self.get('TOR_PT_CLIENT_TRANSPORTS').split(',')
+    if '*' in transports:
+      allTransportsEnabled=True
+      transports.remove('*')      
+
   # Returns a list of strings representing the client transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True.
   def getClientTransports(self):
-    return clientTransports
+    return transports
 
   # Write a message to stdout specifying a supported transport
   # Takes: str, int, (str, int), [str], [str]
   def writeMethod(self, name, socksVersion, address, args, optArgs): # CMETHOD
-    s='CMETHOD '+str(name)+' socks'+str(socksVersion)+' '+str(address[0])+':'+str(address[1])
+    methodLine='CMETHOD %s socks%s %s:%s' % (name, socksVersion, address[0], address[1]))
     if args and len(args)>0:
-      s=s+' ARGS='+args.join(',')
+      methodLine=methodLine+' ARGS='+args.join(',')
     if optArgs and len(optArgs)>0:
-      s=s+' OPT-ARGS='+args.join(',')
-    print(s) 
+      methodLine=methodLine+' OPT-ARGS='+args.join(',')
+    print(methodLine) 
    
   # Write a message to stdout specifying that an error occurred setting up the specified method
   # Takes: str, str
   def writeMethodError(self, name, message): # CMETHOD-ERROR
-    print('CMETHOD-ERROR '+str(name)+' '+str(message))
+    print('CMETHOD-ERROR %s %s' % (name, message))
     
   # Write a message to stdout specifying that the list of supported transports has ended
   def writeMethodEnd(self): # CMETHODS DONE

@@ -9,6 +9,7 @@ __docformat__ = 'restructuredtext'
 class Config:
   stateLocation=None     # TOR_PT_STATE_LOCATION
   managedTransportVer=[] # TOR_PT_MANAGED_TRANSPORT_VER
+  transports=[] # TOR_PT_SERVER_TRANSPORTS or TOR_PT_CLIENT_TRANSPORTS
   allTransportsEnabled=False
   
   #Public methods
@@ -16,9 +17,6 @@ class Config:
   def __init__(self): # throws EnvError
     stateLocation=self.get('TOR_PT_STATE_LOCATION')
     managedTransportVer=self.get('TOR_PT_MANAGED_TRANSPORT_VER').split(',')
-    if '*' in managedTransportVer:
-      allTransportsEnabled=True
-      managedTransportVer.remove('*')      
         
   # Returns a string representing the path to the state storage directory (which may not exist, but should be creatable) reported by Tor
   def getStateLocation(self):
@@ -31,21 +29,24 @@ class Config:
   # Checks to see if the specified version is included in those reported by Tor
   # Returns True if the version is included and False if it is not
   def checkManagedTransportVersion(self, version):
-    return allTransportsEnabled or version in managedTransportVer
+    return version in managedTransportVer
 
   # Returns a bool, True if the transport '*' was specified by Tor, otherwise False.
   def getAllTransportsEnabled(self):
     return allTransportsEnabled
+    
+  def checkTransportEnabled(self, transport):
+    return allTransportsEnabled or transport in transports    
 
   # Write a message to stdout specifying that an error parsing the environment variables has occurred
   # Takes: str
   def writeEnvError(self, message): # ENV-ERROR
-    print('ENV-ERROR '+str(message))
+    print('ENV-ERROR %s' % (message))
 
   # Write a message to stdout specifying that the specified configuration protocol version is supported   
   # Takes: str
   def writeVersion(self, version): # VERSION
-    print('VERSION '+str(version))
+    print('VERSION %s' % (version))
 
   # Write a message to stdout specifying that none of the specified configuration protocol versions are supported
   def writeVersionError(self): # VERSION-ERROR

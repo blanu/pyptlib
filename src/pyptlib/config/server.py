@@ -12,7 +12,6 @@ class ServerConfig(Config):
   extendedServerPort=None # TOR_PT_EXTENDED_SERVER_PORT
   ORPort=None             # TOR_PT_ORPORT
   serverBindAddr={}       # TOR_PT_SERVER_BINADDR
-  serverTransports=[]     # TOR_PT_SERVER_TRANSPORTS
   
   #Public methods
   
@@ -27,7 +26,10 @@ class ServerConfig(Config):
       key,value=bind.split(',')
       serverBindAddr[key]=value
     
-    serverTransports=self.get('TOR_PT_SERVER_TRANSPORTS').split(',')
+    transports=self.get('TOR_PT_SERVER_TRANSPORTS').split(',')
+    if '*' in transports:
+      allTransportsEnabled=True
+      transports.remove('*')      
     
   # Returns a tuple (str,int) representing the address of the Tor server port as reported by Tor
   def getExtendedServerPort(self):
@@ -43,20 +45,20 @@ class ServerConfig(Config):
     
   # Returns a list of strings representing the server transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True.
   def getServerTransports(self):
-    return serverTransports
-
+    return transports
+    
   # Write a message to stdout specifying a supported transport
   # Takes: str, (str, int), MethodOptions
   def writeMethod(self, name, address, options): # SMETHOD
-    s='SMETHOD '+str(name)+' '+str(address[0])+':'+str(address[1])
     if options:
-      s=s+' '+str(options)
-    print(s)
+      print('SMETHOD %s %s:%s %s' % (name, address[0], address[1], options))
+    else:
+      print('SMETHOD %s %s:%s' % (name, address[0], address[1]))
     
   # Write a message to stdout specifying that an error occurred setting up the specified method
   # Takes: str, str
   def writeMethodError(self, name, message): # SMETHOD-ERROR
-    print('SMETHOD-ERROR '+str(name)+' '+str(message))
+    print('SMETHOD-ERROR %s %s' % (name, message))
     
   # Write a message to stdout specifying that the list of supported transports has ended
   def writeMethodEnd(self): # SMETHODS DONE
