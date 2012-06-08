@@ -11,4 +11,6 @@ class ServerManager(Manager):
     os.environ['TOR_PT_SERVER_BINDADDR']'dummy-127.0.0.1:46466'
     os.environ['TOR_PT_SERVER_TRANSPORTS']='dummy'
     
-    
+if __name__=='__main__':
+  manager=ServerManager()
+  manager.launch('pyptlib/framework/server.py')

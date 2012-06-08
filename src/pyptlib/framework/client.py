@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import time
 
@@ -12,30 +14,34 @@ from monocle.stack import eventloop
 from monocle.stack.network import add_service, Service, Client, ConnectionLost
 from loopback import FakeSocket
 
-from shared import *
-from socks import *
+from socks import SocksHandler
 
-@_o
-def handle_socks(conn):
-  print('handle_socks')
-  yield readHandshake(conn)
-  print('read handshake')
-  yield sendHandshake(conn)
-  print('send handshake')
-  dest=yield readRequest(conn)
-  print('read request: '+str(dest))
-  yield sendResponse(dest, conn)
-  print('sent response')
+from config.client import ClientConfig
+from daemon import *
 
-  addr, port=uncompact(dest)
-  print(addr)
-  print(port)
+class ManagedClient(Daemon):
+  def __init__(self):
+    try:
+      Daemon.__init__(ClientConfig(), SocksHandler())
+    except UnsupportedManagedTransportVersionException:
+      return
+    except NoSupportedTransportsException:
+      return
 
-  client = Client()
-  yield client.connect(addr, port)
-  print('connected '+str(addr)+', '+str(port))
-  monocle.launch(pump, conn, client, None)
-  yield pump(client, conn, None)
+    try:
+      self.launchClient(self.supportedTransport)
+      self.config.writeMethod(self.supportedTransport)
+    except TransportLaunchException as e:
+      self.config.writeMethodError(self.supportedTransport, e.message)
 
-add_service(Service(handle_socks, port=7051))
-eventloop.run()
+    self.config.writeMethodEnd()
+    
+    self.run()
+      
+  def launchClient(self, name, port):
+    if name!=self.supportedTransport:
+      raise TransportLaunchException('Tried to launch unsupported transport %s' % (name))
+
+    client=DummyClient()
+    self.handler.setTransport(client)
+    add_service(Service(self.handler, port=port))    

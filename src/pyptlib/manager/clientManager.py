@@ -8,4 +8,7 @@ class ClientManager(Manager):
   
     os.environ['TOR_PT_CLIENT_TRANSPORTS']='dummy'
     
-    
+if __name__=='__main__':
+  manager=ClientManager()
+  manager.launch('pyptlib/framework/client.py')
+  

@@ -6,6 +6,8 @@ from monocle import _o, Return
 
 from dust.core.util import encode
 
+from shared import pump
+
 def uncompact(x):
     ip, port = unpack("!4sH", x)
     return inet_ntoa(ip), port
@@ -39,3 +41,31 @@ def readRequest(input):
 @_o
 def sendResponse(dest, output):
   yield output.write(b"\x05\x00\x00\x01"+dest)
+
+class SocksHandler:
+  transport=None
+
+  def setTransport(self, transport):
+    self.transport=transport
+
+  @_o
+  def handle(self, conn):
+    print('handle_socks')
+    yield readHandshake(conn)
+    print('read handshake')
+    yield sendHandshake(conn)
+    print('send handshake')
+    dest=yield readRequest(conn)
+    print('read request: '+str(dest))
+    yield sendResponse(dest, conn)
+    print('sent response')
+
+    addr, port=uncompact(dest)
+    print(addr)
+    print(port)
+
+    client = Client()
+    yield client.connect(addr, port)
+    print('connected '+str(addr)+', '+str(port))
+    monocle.launch(pump, conn, client, None)
+    yield pump(client, conn, None)

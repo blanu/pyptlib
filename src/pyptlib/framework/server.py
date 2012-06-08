@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import time
 
@@ -13,16 +15,34 @@ from monocle.stack.network import add_service, Service, Client
 
 from shared import pump
 
-@_o
-def handle_proxy(conn):
-  print('connection')
-  client = Client()
-  yield client.connect('blanu.net', 7051)
+from config.server import ServerConfig
+from daemon import Daemon
 
-  coder=yield handshake(client)
+from proxy import ProxyHandler
 
-  monocle.launch(pump, conn, client, coder.encrypt)
-  yield pump(client, conn, coder.decrypt)
+class ManagedServer(Daemon):
+  def __init__(self):
+    try:
+      Daemon.__init__(ServerConfig(), ProxyHandler())
+    except UnsupportedManagedTransportVersionException:
+      return
+    except NoSupportedTransportsException:
+      return
 
-add_service(Service(handle_proxy, port=7050))
-eventloop.run()
+    try:
+      self.launchServer(self.supportedTransport)
+      self.config.writeMethod(self.supportedTransport)
+    except TransportLaunchException as e:
+      self.config.writeMethodError(self.supportedTransport, e.message)
+
+    self.config.writeMethodEnd()
+    
+    self.run()
+    
+  def launchServer(self, name, port):
+    if name!=self.supportedTransport:
+      raise TransportLaunchException('Tried to launch unsupported transport %s' % (name))
+
+    client=DummyServer()
+    self.handler.setTransport(client)
+    add_service(Service(self.handler, port=port))   
