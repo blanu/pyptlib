@@ -13,5 +13,4 @@ class ServerManager(Manager):
     
 if __name__=='__main__':
   manager=ServerManager()
-#  manager.launch('src/pyptlib/framework/server.py')
-  manager.launch(['python', '-u', 'test.py'])
+  manager.launch('src/pyptlib/framework/server.py')

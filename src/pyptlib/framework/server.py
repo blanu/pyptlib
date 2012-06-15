@@ -2,7 +2,6 @@
 
 import os
 import sys
-import time
 
 from struct import unpack
 from socket import inet_ntoa
@@ -27,7 +26,6 @@ from pyptlib.transports.dummy import DummyServer
 class ManagedServer(Daemon):
   def __init__(self):
     try:
-      print('init')
       Daemon.__init__(self, ServerConfig(), ProxyHandler())
     except EnvException:
       print('error 0')
@@ -40,7 +38,6 @@ class ManagedServer(Daemon):
       return
 
     try:
-      print('launch')
       self.launchServer(self.supportedTransport, 8182)
       self.config.writeMethod(self.supportedTransport, ('127.0.0.1', 8182), MethodOptions())
     except TransportLaunchException as e:
@@ -49,7 +46,6 @@ class ManagedServer(Daemon):
 
     self.config.writeMethodEnd()
     
-    print('run')
     self.run()
     
   def launchServer(self, name, port):
@@ -62,10 +58,5 @@ class ManagedServer(Daemon):
 
 if __name__=='__main__':
   sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
-  print('main')
-  sys.stdout.flush()
-  import time
-  while True:
-    time.sleep(1000)
-#  server=ManagedServer()
+  server=ManagedServer()
   
