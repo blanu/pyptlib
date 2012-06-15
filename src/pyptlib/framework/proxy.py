@@ -4,9 +4,9 @@ from socket import inet_ntoa
 import monocle
 from monocle import _o, Return
 
-from dust.core.util import encode
+from pyptlib.util import encode
 
-from shared import pump
+from pyptlib.framework.shared import pump
 
 class ProxyHandler:
   transport=None

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python -u
 
 import sys
 import time
@@ -12,17 +12,17 @@ monocle.init('tornado')
 
 from monocle.stack import eventloop
 from monocle.stack.network import add_service, Service, Client, ConnectionLost
-from loopback import FakeSocket
+from pyptlib.framework.loopback import FakeSocket
 
-from socks import SocksHandler
+from pyptlib.framework.socks import SocksHandler
 
-from config.client import ClientConfig
-from daemon import *
+from pyptlib.config.client import ClientConfig
+from pyptlib.framework.daemon import *
 
 class ManagedClient(Daemon):
   def __init__(self):
     try:
-      Daemon.__init__(ClientConfig(), SocksHandler())
+      Daemon.__init__(self, ClientConfig(), SocksHandler())
     except UnsupportedManagedTransportVersionException:
       return
     except NoSupportedTransportsException:

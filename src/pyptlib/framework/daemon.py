@@ -12,10 +12,10 @@ monocle.init('tornado')
 
 from monocle.stack import eventloop
 from monocle.stack.network import add_service, Service, Client, ConnectionLost
-from loopback import FakeSocket
+from pyptlib.framework.loopback import FakeSocket
 
-from shared import *
-from socks import *
+from pyptlib.framework.shared import *
+from pyptlib.framework.socks import *
 
 class Daemon:
   config=None
@@ -28,13 +28,13 @@ class Daemon:
     self.config=configManager
     self.handler=handler
     
-    if self.config.checkManagedTransportVersion(supportedTransportVersion):
-      self.config.writeVersion(supportedTransportVersion)
+    if self.config.checkManagedTransportVersion(self.supportedTransportVersion):
+      self.config.writeVersion(self.supportedTransportVersion)
     else:
       self.config.writeVersionError()
       raise UnsupportedManagedTransportVersionException()
         
-    if not self.config.checkTransportEnabled(supportedTransport):
+    if not self.config.checkTransportEnabled(self.supportedTransport):
       raise NoSupportedTransportsException()
   
   def run(self):

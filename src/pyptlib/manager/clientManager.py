@@ -1,6 +1,6 @@
 import os
 
-from manager import manager
+from pyptlib.manager.manager import Manager
 
 class ClientManager(Manager):
   def __init__(self):
@@ -10,5 +10,5 @@ class ClientManager(Manager):
     
 if __name__=='__main__':
   manager=ClientManager()
-  manager.launch('pyptlib/framework/client.py')
+  manager.launch('src/pyptlib/framework/client.py')
   

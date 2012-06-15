@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python -u
 
+import os
 import sys
 import time
 
@@ -13,30 +14,42 @@ monocle.init('tornado')
 from monocle.stack import eventloop
 from monocle.stack.network import add_service, Service, Client
 
-from shared import pump
+from pyptlib.framework.shared import pump
 
-from config.server import ServerConfig
-from daemon import Daemon
+from pyptlib.config.config import EnvException
+from pyptlib.config.server import ServerConfig, MethodOptions
+from pyptlib.framework.daemon import *
 
-from proxy import ProxyHandler
+from pyptlib.framework.proxy import ProxyHandler
+
+from pyptlib.transports.dummy import DummyServer
 
 class ManagedServer(Daemon):
   def __init__(self):
     try:
-      Daemon.__init__(ServerConfig(), ProxyHandler())
+      print('init')
+      Daemon.__init__(self, ServerConfig(), ProxyHandler())
+    except EnvException:
+      print('error 0')
+      return
     except UnsupportedManagedTransportVersionException:
+      print('error 1')
       return
     except NoSupportedTransportsException:
+      print('error 2')
       return
 
     try:
-      self.launchServer(self.supportedTransport)
-      self.config.writeMethod(self.supportedTransport)
+      print('launch')
+      self.launchServer(self.supportedTransport, 8182)
+      self.config.writeMethod(self.supportedTransport, ('127.0.0.1', 8182), MethodOptions())
     except TransportLaunchException as e:
+      print('error 3')
       self.config.writeMethodError(self.supportedTransport, e.message)
 
     self.config.writeMethodEnd()
     
+    print('run')
     self.run()
     
   def launchServer(self, name, port):
@@ -46,3 +59,13 @@ class ManagedServer(Daemon):
     client=DummyServer()
     self.handler.setTransport(client)
     add_service(Service(self.handler, port=port))   
+
+if __name__=='__main__':
+  sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+  print('main')
+  sys.stdout.flush()
+  import time
+  while True:
+    time.sleep(1000)
+#  server=ManagedServer()
+  

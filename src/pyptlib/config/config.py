@@ -15,28 +15,28 @@ class Config:
   #Public methods
   
   def __init__(self): # throws EnvError
-    stateLocation=self.get('TOR_PT_STATE_LOCATION')
-    managedTransportVer=self.get('TOR_PT_MANAGED_TRANSPORT_VER').split(',')
+    self.stateLocation=self.get('TOR_PT_STATE_LOCATION')
+    self.managedTransportVer=self.get('TOR_PT_MANAGED_TRANSPORT_VER').split(',')
         
   # Returns a string representing the path to the state storage directory (which may not exist, but should be creatable) reported by Tor
   def getStateLocation(self):
-    return stateLocation
+    return self.stateLocation
 
   # Returns a list of strings representing supported versions as reported by Tor    
   def getManagedTransportVersions(self):
-    return managedTransportVer
+    return self.managedTransportVer
     
   # Checks to see if the specified version is included in those reported by Tor
   # Returns True if the version is included and False if it is not
   def checkManagedTransportVersion(self, version):
-    return version in managedTransportVer
+    return version in self.managedTransportVer
 
   # Returns a bool, True if the transport '*' was specified by Tor, otherwise False.
   def getAllTransportsEnabled(self):
-    return allTransportsEnabled
+    return self.allTransportsEnabled
     
   def checkTransportEnabled(self, transport):
-    return allTransportsEnabled or transport in transports    
+    return self.allTransportsEnabled or transport in self.transports    
 
   # Write a message to stdout specifying that an error parsing the environment variables has occurred
   # Takes: str
@@ -58,8 +58,13 @@ class Config:
     if key in os.environ:
       return os.environ[key]
     else:
-      raise EnvException()    
+      message="Missing environment variable %s" % (key)
+      self.writeEnvError(message)
+      raise EnvException(message)
 
 # Exception thrown when there is an error parsing the configuration parameters provided by Tor in environment variables    
 class EnvException(Exception):
-  pass
+  message=None
+
+  def __init__(self, message):
+    self.message=message

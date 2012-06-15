@@ -3,7 +3,7 @@ from monocle import _o, Return
 
 from monocle.stack.network import ConnectionLost
 
-from dust.core.util import encode
+from pyptlib.util import encode
 
 @_o
 def pump(input, output, transform, debug=False):

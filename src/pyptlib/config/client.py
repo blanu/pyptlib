@@ -1,6 +1,6 @@
 import os
 
-from config import Config
+from pyptlib.config.config import Config
 
 """
 Configuration for a Pluggable Transport client.
@@ -14,19 +14,19 @@ class ClientConfig(Config):
   def __init__(self): # throws EnvError
     Config.__init__(self)
     
-    transports=self.get('TOR_PT_CLIENT_TRANSPORTS').split(',')
-    if '*' in transports:
-      allTransportsEnabled=True
-      transports.remove('*')      
+    self.transports=self.get('TOR_PT_CLIENT_TRANSPORTS').split(',')
+    if '*' in self.transports:
+      self.allTransportsEnabled=True
+      self.transports.remove('*')      
 
   # Returns a list of strings representing the client transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True.
   def getClientTransports(self):
-    return transports
+    return self.transports
 
   # Write a message to stdout specifying a supported transport
   # Takes: str, int, (str, int), [str], [str]
   def writeMethod(self, name, socksVersion, address, args, optArgs): # CMETHOD
-    methodLine='CMETHOD %s socks%s %s:%s' % (name, socksVersion, address[0], address[1]))
+    methodLine='CMETHOD %s socks%s %s:%s' % (name, socksVersion, address[0], address[1])
     if args and len(args)>0:
       methodLine=methodLine+' ARGS='+args.join(',')
     if optArgs and len(optArgs)>0:
