@@ -1,4 +1,5 @@
 .DS_Store
+pyptlib.xcodeproj/*
 build/*
 dist/*
 pyptlib.egg-info/*
