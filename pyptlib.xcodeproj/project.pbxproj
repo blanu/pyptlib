@@ -1,0 +1,196 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		89BF94B21582618D008EA2A6 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		89BF94B41582618D008EA2A6 /* client.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = client.py; sourceTree = "<group>"; };
+		89BF94B51582618D008EA2A6 /* config.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = config.py; sourceTree = "<group>"; };
+		89BF94B61582618D008EA2A6 /* server.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
+		89BF94B81582618D008EA2A6 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		89BF94BA1582618D008EA2A6 /* daemon.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = daemon.py; sourceTree = "<group>"; };
+		89BF94BB1582618D008EA2A6 /* loopback.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = loopback.py; sourceTree = "<group>"; };
+		89BF94BD1582618D008EA2A6 /* shared.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = shared.py; sourceTree = "<group>"; };
+		89BF94BE1582618D008EA2A6 /* socks.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = socks.py; sourceTree = "<group>"; };
+		89BF94C01582618D008EA2A6 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		89BF94C11582618D008EA2A6 /* clientManager.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = clientManager.py; sourceTree = "<group>"; };
+		89BF94C21582618D008EA2A6 /* manager.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = manager.py; sourceTree = "<group>"; };
+		89BF94C31582618D008EA2A6 /* serverManager.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = serverManager.py; sourceTree = "<group>"; };
+		89BF94C51582618D008EA2A6 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		89BF94C61582618D008EA2A6 /* dummy.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = dummy.py; sourceTree = "<group>"; };
+		89BF94C815826198008EA2A6 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		89BF94C915826198008EA2A6 /* setup.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = setup.py; sourceTree = "<group>"; };
+		89BF94CB1582730E008EA2A6 /* rot13.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = rot13.py; sourceTree = "<group>"; };
+		89BF94CC15828106008EA2A6 /* proxy.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = proxy.py; sourceTree = "<group>"; };
+		89C39C501595017200271216 /* obfsproxy.py */ = {isa = PBXFileReference; path = obfsproxy.py; sourceTree = "<group>"; };
+		89C39C5E1597DBC800271216 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		89C39C5F1597DBC800271216 /* client.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = client.py; sourceTree = "<group>"; };
+		89C39C601597DBC800271216 /* server.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
+		89C39C611597DBE000271216 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		89C39C621597DBE000271216 /* client.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = client.py; sourceTree = "<group>"; };
+		89C39C631597DBE000271216 /* server.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = server.py; sourceTree = "<group>"; };
+		89DE1FB71586770900917330 /* util.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = util.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		894A8B13158259E0004F88D0 = {
+			isa = PBXGroup;
+			children = (
+				89BF94C815826198008EA2A6 /* README */,
+				89BF94C915826198008EA2A6 /* setup.py */,
+				89BF94B01582618D008EA2A6 /* src */,
+			);
+			sourceTree = "<group>";
+		};
+		89BF94B01582618D008EA2A6 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				89BF94B11582618D008EA2A6 /* pyptlib */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		89BF94B11582618D008EA2A6 /* pyptlib */ = {
+			isa = PBXGroup;
+			children = (
+				89DE1FB71586770900917330 /* util.py */,
+				89BF94B21582618D008EA2A6 /* __init__.py */,
+				89C39C4F1595017200271216 /* cli */,
+				89BF94B31582618D008EA2A6 /* config */,
+				89BF94B71582618D008EA2A6 /* framework */,
+				89BF94BF1582618D008EA2A6 /* manager */,
+				89BF94C41582618D008EA2A6 /* transports */,
+			);
+			path = pyptlib;
+			sourceTree = "<group>";
+		};
+		89BF94B31582618D008EA2A6 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				89BF94B41582618D008EA2A6 /* client.py */,
+				89BF94B51582618D008EA2A6 /* config.py */,
+				89BF94B61582618D008EA2A6 /* server.py */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		89BF94B71582618D008EA2A6 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				89C39C5D1597DB4B00271216 /* external */,
+				89C39C5C1597DB2700271216 /* managed */,
+				89BF94B81582618D008EA2A6 /* __init__.py */,
+				89BF94BA1582618D008EA2A6 /* daemon.py */,
+				89BF94BB1582618D008EA2A6 /* loopback.py */,
+				89BF94BD1582618D008EA2A6 /* shared.py */,
+				89BF94BE1582618D008EA2A6 /* socks.py */,
+				89BF94CC15828106008EA2A6 /* proxy.py */,
+			);
+			path = framework;
+			sourceTree = "<group>";
+		};
+		89BF94BF1582618D008EA2A6 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				89BF94C01582618D008EA2A6 /* __init__.py */,
+				89BF94C11582618D008EA2A6 /* clientManager.py */,
+				89BF94C21582618D008EA2A6 /* manager.py */,
+				89BF94C31582618D008EA2A6 /* serverManager.py */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
+		89BF94C41582618D008EA2A6 /* transports */ = {
+			isa = PBXGroup;
+			children = (
+				89BF94C51582618D008EA2A6 /* __init__.py */,
+				89BF94C61582618D008EA2A6 /* dummy.py */,
+				89BF94CB1582730E008EA2A6 /* rot13.py */,
+			);
+			path = transports;
+			sourceTree = "<group>";
+		};
+		89C39C4F1595017200271216 /* cli */ = {
+			isa = PBXGroup;
+			children = (
+				89C39C501595017200271216 /* obfsproxy.py */,
+			);
+			path = cli;
+			sourceTree = "<group>";
+		};
+		89C39C5C1597DB2700271216 /* managed */ = {
+			isa = PBXGroup;
+			children = (
+				89C39C5E1597DBC800271216 /* __init__.py */,
+				89C39C5F1597DBC800271216 /* client.py */,
+				89C39C601597DBC800271216 /* server.py */,
+			);
+			path = managed;
+			sourceTree = "<group>";
+		};
+		89C39C5D1597DB4B00271216 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				89C39C611597DBE000271216 /* __init__.py */,
+				89C39C621597DBE000271216 /* client.py */,
+				89C39C631597DBE000271216 /* server.py */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		894A8B15158259E0004F88D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 894A8B18158259E0004F88D0 /* Build configuration list for PBXProject "pyptlib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 894A8B13158259E0004F88D0;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		894A8B1A158259E0004F88D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		894A8B1B158259E0004F88D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		894A8B18158259E0004F88D0 /* Build configuration list for PBXProject "pyptlib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				894A8B1A158259E0004F88D0 /* Debug */,
+				894A8B1B158259E0004F88D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 894A8B15158259E0004F88D0 /* Project object */;
+}
