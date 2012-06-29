@@ -34,6 +34,7 @@ def reportSuccess(
     args,
     optArgs,
     ):
+
     config.writeMethod(name, socksVersion, address, args, optArgs)
 
 

@@ -4,6 +4,7 @@
 from pyptlib.config import EnvException
 from pyptlib.client import ServerConfig
 
+
 def init(transports):
     supportedTransportVersion = '1'
 
@@ -32,6 +33,7 @@ def reportSuccess(
     args,
     options,
     ):
+
     config.writeMethod(name, address, options)
 
 
