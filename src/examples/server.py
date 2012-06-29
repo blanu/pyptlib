@@ -6,42 +6,39 @@ import sys
 from struct import unpack
 from socket import inet_ntoa
 
-from pyptlib.config.config import EnvException
-from pyptlib.config.server import ServerConfig, MethodOptions
+from pyptlib.config import EnvException
+from pyptlib.server import ServerConfig, MethodOptions
 
-class ManagedServer(Daemon):
-  def __init__(self):
-    try:
-      Daemon.__init__(self, ServerConfig(), ProxyHandler())
-    except EnvException:
-      print('error 0')
-      return
-    except UnsupportedManagedTransportVersionException:
-      print('error 1')
-      return
-    except NoSupportedTransportsException:
-      print('error 2')
-      return
+supportedTransport='dummy'
 
-    try:
-      self.launchServer(self.supportedTransport, 8182)
-      self.config.writeMethod(self.supportedTransport, ('127.0.0.1', 8182), MethodOptions())
-    except TransportLaunchException as e:
-      print('error 3')
-      self.config.writeMethodError(self.supportedTransport, e.message)
-
-    self.config.writeMethodEnd()
-    
-    self.run()
-    
-  def launchServer(self, name, port):
-    if name!=self.supportedTransport:
-      raise TransportLaunchException('Tried to launch unsupported transport %s' % (name))
-
-    client=DummyServer()
-    self.handler.setTransport(client)
-    add_service(Service(self.handler, port=port))   
+def launchServer(self, name, port):
+  if name!=supportedTransport:
+    raise TransportLaunchException('Tried to launch unsupported transport %s' % (name))
 
 if __name__=='__main__':
-  server=ManagedServer()
-  
+  supportedTransportVersion='1'
+  config=ClientConfig()
+  try:
+    if config.checkManagedTransportVersion(supportedTransportVersion):
+      config.writeVersion(supportedTransportVersion)
+    else:
+      config.writeVersionError()
+      raise UnsupportedManagedTransportVersionException()
+  except EnvException:
+    print('error 0')
+    return
+  except UnsupportedManagedTransportVersionException:
+    print('error 1')
+    return
+  except NoSupportedTransportsException:
+    print('error 2')
+    return
+
+  try:
+    launchServer(supportedTransport, 8182)
+    config.writeMethod(supportedTransport, ('127.0.0.1', 8182), MethodOptions())
+  except TransportLaunchException as e:
+    print('error 3')
+    config.writeMethodError(supportedTransport, e.message)
+
+  config.writeMethodEnd()
