@@ -14,7 +14,11 @@ from pyptlib.client import ClientConfig
 
 def init(transports):
     supportedTransportVersion = '1'
-    config = ClientConfig()
+    
+    try:
+      config = ClientConfig()
+    except EnvException:
+      return []
 
     if config.checkManagedTransportVersion(supportedTransportVersion):
         config.writeVersion(supportedTransportVersion)

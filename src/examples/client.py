@@ -1,62 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-
-import argparse
-
-from struct import unpack
-from socket import inet_ntoa
-
-from pyptlib.config import EnvException
-from pyptlib.client import ClientConfig
-
-
-class UnsupportedManagedTransportVersionException(Exception):
-
-    pass
-
-
-class NoSupportedTransportsException(Exception):
-
-    pass
-
+from pyptlib.easy.client import init, reportSucess, reportFailure, reportEnd
 
 class TransportLaunchException(Exception):
-
-    def __init__(self, message):
-        message = message
-
+  pass
 
 def launchClient(self, name, port):
-    if name != supportedTransport:
+    if name != 'dummy':
         raise TransportLaunchException('Tried to launch unsupported transport %s'
                  % name)
 
-
 if __name__ == '__main__':
-    supportedTransportVersion = '1'
-    supportedTransport = 'dummy'
-    config = ClientConfig()
+    supportedTransports = ['dummy', 'rot13']
 
-    if config.checkManagedTransportVersion(supportedTransportVersion):
-        config.writeVersion(supportedTransportVersion)
-    else:
-        config.writeVersionError()
-        raise UnsupportedManagedTransportVersionException()
-
-    if not config.checkTransportEnabled(supportedTransport):
-        raise NoSupportedTransportsException()
-
-    try:
-        launchClient(supportedTransport, 8182)
-        config.writeMethod(supportedTransport, 5, ('127.0.0.1', 8182),
-                           None, None)
-    except TransportLaunchException, e:
-        print 'error 3'
-        config.writeMethodError(supportedTransport, e.message)
-
-    config.writeMethodEnd()
-
-    run()
+    matchedTransports=init(supportedTransports)
+    for transport in matchedTransports:
+      try:
+        launchClient(transport, 8182)
+        reportSuccess(transport, 5, ('127.0.0.1', 8182), None, None)
+      except TransportLaunchException:
+        reportFailure(transport, 'Failed to launch')
+    reportEnd()
