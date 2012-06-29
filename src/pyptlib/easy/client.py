@@ -1,14 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-
-import argparse
-
-from struct import unpack
-from socket import inet_ntoa
-
 from pyptlib.config import EnvException
 from pyptlib.client import ClientConfig
 
