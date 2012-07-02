@@ -1,3 +1,6 @@
+pytidy.py
+tidy.py
+tidyall
 .DS_Store
 pyptlib.xcodeproj/*
 build/*
