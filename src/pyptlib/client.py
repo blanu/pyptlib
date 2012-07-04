@@ -3,7 +3,7 @@
 
 import os
 
-from pyptlib.config.config import Config
+from pyptlib.config import Config
 
 __docformat__ = 'restructuredtext'
 

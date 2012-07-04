@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyptlib.config import EnvException
-from pyptlib.client import ServerConfig
+from pyptlib.server import ServerConfig
 
 
 def init(transports):
@@ -21,7 +21,7 @@ def init(transports):
 
     matchedTransports = []
     for transport in transports:
-        if config.checkTransportEnabled(supportedTransport):
+        if config.checkTransportEnabled(transport):
             matchedTransports.append(transport)
 
     return matchedTransports
@@ -30,18 +30,18 @@ def init(transports):
 def reportSuccess(
     name,
     address,
-    args,
     options,
     ):
 
+    config = ServerConfig()
     config.writeMethod(name, address, options)
 
 
 def reportFailure(name, message):
+    config = ServerConfig()
     config.writeMethodError(name, message)
 
 
 def reportEnd():
+    config = ServerConfig()
     config.writeMethodEnd()
-
-

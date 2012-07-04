@@ -21,7 +21,7 @@ def init(transports):
 
     matchedTransports = []
     for transport in transports:
-        if config.checkTransportEnabled(supportedTransport):
+        if config.checkTransportEnabled(transport):
             matchedTransports.append(transport)
 
     return matchedTransports
@@ -35,14 +35,17 @@ def reportSuccess(
     optArgs,
     ):
 
+    config = ClientConfig()
     config.writeMethod(name, socksVersion, address, args, optArgs)
 
 
 def reportFailure(name, message):
+    config = ClientConfig()
     config.writeMethodError(name, message)
 
 
 def reportEnd():
+    config = ClientConfig()
     config.writeMethodEnd()
 
 
