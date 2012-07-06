@@ -27,11 +27,7 @@ def init(transports):
     return matchedTransports
 
 
-def reportSuccess(
-    name,
-    address,
-    options,
-    ):
+def reportSuccess(name, address, options):
 
     config = ServerConfig()
     config.writeMethod(name, address, options)
@@ -45,3 +41,5 @@ def reportFailure(name, message):
 def reportEnd():
     config = ServerConfig()
     config.writeMethodEnd()
+
+
