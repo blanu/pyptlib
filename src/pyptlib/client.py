@@ -44,17 +44,17 @@ class ClientConfig(Config):
             methodLine = methodLine + ' ARGS=' + args.join(',')
         if optArgs and len(optArgs) > 0:
             methodLine = methodLine + ' OPT-ARGS=' + args.join(',')
-        print methodLine
+        self.emit(methodLine)
 
   # Write a message to stdout specifying that an error occurred setting up the specified method
   # Takes: str, str
 
     def writeMethodError(self, name, message):  # CMETHOD-ERROR
-        print 'CMETHOD-ERROR %s %s' % (name, message)
+        self.emit('CMETHOD-ERROR %s %s' % (name, message))
 
   # Write a message to stdout specifying that the list of supported transports has ended
 
     def writeMethodEnd(self):  # CMETHODS DONE
-        print 'CMETHODS DONE'
+        self.emit('CMETHODS DONE')
 
 

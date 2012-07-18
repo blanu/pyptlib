@@ -65,21 +65,21 @@ class ServerConfig(Config):
         ):
 
         if options:
-            print 'SMETHOD %s %s:%s %s' % (name, address[0],
-                    address[1], options)
+            self.emit('SMETHOD %s %s:%s %s' % (name, address[0],
+                    address[1], options))
         else:
-            print 'SMETHOD %s %s:%s' % (name, address[0], address[1])
+            self.emit('SMETHOD %s %s:%s' % (name, address[0], address[1]))
 
   # Write a message to stdout specifying that an error occurred setting up the specified method
   # Takes: str, str
 
     def writeMethodError(self, name, message):  # SMETHOD-ERROR
-        print 'SMETHOD-ERROR %s %s' % (name, message)
+        self.emit('SMETHOD-ERROR %s %s' % (name, message))
 
   # Write a message to stdout specifying that the list of supported transports has ended
 
     def writeMethodEnd(self):  # SMETHODS DONE
-        print 'SMETHODS DONE'
+        self.emit('SMETHODS DONE')
 
 
 class MethodOptions:

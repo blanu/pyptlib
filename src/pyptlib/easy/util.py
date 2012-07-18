@@ -1,15 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from pyptlib.config import EnvException
-from pyptlib.client import ClientConfig
-
+from pyptlib.config import Config, EnvException
 
 def checkClientMode():
     try:
-        client = ClientConfig()
-        return True
+        c = Config()
+        return c.checkClientMode() 
     except EnvException:
         return False
-
-
