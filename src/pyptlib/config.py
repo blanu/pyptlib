@@ -13,10 +13,12 @@ __docformat__ = 'restructuredtext'
 
 
 class Config:
+
     """
     The Config module class a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
     This class contains the parts of the API which are shared by both client and server implementations of the protocol.
     """
+
     stateLocation = None  # TOR_PT_STATE_LOCATION
     managedTransportVer = []  # TOR_PT_MANAGED_TRANSPORT_VER
     transports = []  # TOR_PT_SERVER_TRANSPORTS or TOR_PT_CLIENT_TRANSPORTS
@@ -105,15 +107,19 @@ class Config:
             raise EnvException(message)
 
     def emit(self, msg):
-      print(msg)
-      logging.error(msg)
+        print msg
+        logging.error(msg)
+
 
 # Exception thrown when there is an error parsing the configuration parameters provided by Tor in environment variables
 
 class EnvException(Exception):
+
     """ The EnvException exception is thrown whenever a required environment variable is not presented or cannot be parsed. """
 
     message = None
 
     def __init__(self, message):
         self.message = message
+
+

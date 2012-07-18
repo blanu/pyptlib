@@ -5,6 +5,7 @@
 
 from pyptlib.config import Config, EnvException
 
+
 def checkClientMode():
     """ Checks to see if the daemon has been launched in client mode or server mode. Returns True if it is in client mode, otherwise False. """
 
@@ -13,3 +14,5 @@ def checkClientMode():
         return c.checkClientMode()
     except EnvException:
         return False
+
+

@@ -14,10 +14,12 @@ __docformat__ = 'restructuredtext'
 
 
 class ServerConfig(Config):
+
     """
     The ServerConfig class contains a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
     This class inherits from pyptlib.config.Config and contains just the parts of the API which are specific to the client implementations of the protocol.
     """
+
     extendedServerPort = None  # TOR_PT_EXTENDED_SERVER_PORT
     ORPort = None  # TOR_PT_ORPORT
     serverBindAddr = {}  # TOR_PT_SERVER_BINADDR
@@ -64,6 +66,7 @@ class ServerConfig(Config):
 
     def getServerTransports(self):
         """ Returns a list of strings representing the server transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True. """
+
         return self.transports
 
     def writeMethod(  # SMETHOD
@@ -79,9 +82,10 @@ class ServerConfig(Config):
 
         if options:
             self.emit('SMETHOD %s %s:%s %s' % (name, address[0],
-                    address[1], options))
+                      address[1], options))
         else:
-            self.emit('SMETHOD %s %s:%s' % (name, address[0], address[1]))
+            self.emit('SMETHOD %s %s:%s' % (name, address[0],
+                      address[1]))
 
     def writeMethodError(self, name, message):  # SMETHOD-ERROR
         """
@@ -93,10 +97,12 @@ class ServerConfig(Config):
 
     def writeMethodEnd(self):  # SMETHODS DONE
         """ Write a message to stdout specifying that the list of supported transports has ended """
+
         self.emit('SMETHODS DONE')
 
 
 class MethodOptions:
+
     """ The MethodOptions class represents the method options: FORWARD, ARGS, DECLARE, and USE-EXTENDED-PORT. """
 
     forward = False  # FORWARD
@@ -150,3 +156,5 @@ class MethodOptions:
             options.append('USE-EXTENDED-PORT:1')
 
         return ' '.join(options)
+
+

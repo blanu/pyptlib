@@ -14,6 +14,7 @@ __docformat__ = 'restructuredtext'
 
 
 class ClientConfig(Config):
+
     """
     The ClientConfig class contains a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
     This class inherits from pyptlib.config.Config and contains just the parts of the API which are specific to the client implementations of the protocol.
@@ -73,3 +74,5 @@ class ClientConfig(Config):
         """ Write a message to stdout specifying that the list of supported transports has ended """
 
         self.emit('CMETHODS DONE')
+
+
