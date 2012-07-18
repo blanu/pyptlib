@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""
+    The pyptlib.client module contains a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
+    This module inherits from pyptlib.config and contains just the parts of the API which are specific to the server implementations of the protocol.
+"""
+
 import os
 
 from pyptlib.config import Config
@@ -9,7 +14,10 @@ __docformat__ = 'restructuredtext'
 
 
 class ServerConfig(Config):
-
+"""
+    The ServerConfig class contains a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
+    This class inherits from pyptlib.config.Config and contains just the parts of the API which are specific to the client implementations of the protocol.
+"""
     extendedServerPort = None  # TOR_PT_EXTENDED_SERVER_PORT
     ORPort = None  # TOR_PT_ORPORT
     serverBindAddr = {}  # TOR_PT_SERVER_BINADDR
@@ -17,6 +25,11 @@ class ServerConfig(Config):
   # Public methods
 
     def __init__(self):  # throws EnvError
+        """
+            Initialize the ClientConfig object.
+            This causes the state location, managed transport, and transports version to be set.
+        """
+
         Config.__init__(self)
 
         self.extendedServerPort = self.get('TOR_PT_EXTENDED_SERVER_PORT'
@@ -34,28 +47,24 @@ class ServerConfig(Config):
             self.allTransportsEnabled = True
             self.transports.remove('*')
 
-  # Returns a tuple (str,int) representing the address of the Tor server port as reported by Tor
-
     def getExtendedServerPort(self):
+        """ Returns a tuple (str,int) representing the address of the Tor server port as reported by Tor """
+
         return self.extendedServerPort
 
-  # Returns a tuple (str,int) representing the address of the Tor OR port as reported by Tor
-
     def getORPort(self):
+        """ Returns a tuple (str,int) representing the address of the Tor OR port as reported by Tor """
+
         return self.ORPort
 
-  # Returns a dict {str: (str,int)} representing the addresses for each transport as reported by Tor
-
     def getServerBindAddresses(self):
+        """ Returns a dict {str: (str,int)} representing the addresses for each transport as reported by Tor """
+
         return self.serverBindAddr
 
-  # Returns a list of strings representing the server transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True.
-
     def getServerTransports(self):
+        """ Returns a list of strings representing the server transports reported by Tor. If present, '*' is stripped from this list and used to set allTransportsEnabled to True. """
         return self.transports
-
-  # Write a message to stdout specifying a supported transport
-  # Takes: str, (str, int), MethodOptions
 
     def writeMethod(  # SMETHOD
         self,
@@ -63,6 +72,10 @@ class ServerConfig(Config):
         address,
         options,
         ):
+        """
+        Write a message to stdout specifying a supported transport
+        Takes: str, (str, int), MethodOptions
+        """
 
         if options:
             self.emit('SMETHOD %s %s:%s %s' % (name, address[0],
@@ -70,19 +83,21 @@ class ServerConfig(Config):
         else:
             self.emit('SMETHOD %s %s:%s' % (name, address[0], address[1]))
 
-  # Write a message to stdout specifying that an error occurred setting up the specified method
-  # Takes: str, str
-
     def writeMethodError(self, name, message):  # SMETHOD-ERROR
+    """
+        Write a message to stdout specifying that an error occurred setting up the specified method
+        Takes: str, str
+    """
+
         self.emit('SMETHOD-ERROR %s %s' % (name, message))
 
-  # Write a message to stdout specifying that the list of supported transports has ended
-
     def writeMethodEnd(self):  # SMETHODS DONE
+    """ Write a message to stdout specifying that the list of supported transports has ended """
         self.emit('SMETHODS DONE')
 
 
 class MethodOptions:
+    """ The MethodOptions class represents the method options: FORWARD, ARGS, DECLARE, and USE-EXTENDED-PORT. """
 
     forward = False  # FORWARD
     args = {}  # ARGS
@@ -91,30 +106,29 @@ class MethodOptions:
 
   # Public methods
 
-    def __init__(self):
-        pass
-
-  # Sets forward to True
-
     def setForward(self):
+        """ Sets forward to True """
+
         self.forward = True
 
-  # Adds a key-value pair to args
-
     def addArg(self, key, value):
+        """ Adds a key-value pair to args """
+
         self.args[key] = value
 
-  # Adds a key-value pair to declare
-
     def addDeclare(self, key, value):
+        """ Adds a key-value pair to declare """
+
         self.declare[key] = value
 
-  # Sets useExtendedPort to True
-
     def setUserExtendedPort(self):
+        """ Sets useExtendedPort to True """
+
         self.useExtendedPort = True
 
     def __str__(self):
+        """ Returns a string representation of the method options. """
+
         options = []
         if self.forward:
             options.append('FORWARD:1')
@@ -136,5 +150,3 @@ class MethodOptions:
             options.append('USE-EXTENDED-PORT:1')
 
         return ' '.join(options)
-
-
