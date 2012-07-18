@@ -14,17 +14,17 @@ __docformat__ = 'restructuredtext'
 
 
 class ClientConfig(Config):
-"""
+    """
     The ClientConfig class contains a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
     This class inherits from pyptlib.config.Config and contains just the parts of the API which are specific to the client implementations of the protocol.
-"""
+    """
 
   # Public methods
 
     def __init__(self):  # throws EnvError
         """
-            Initialize the ClientConfig object.
-            This causes the state location, managed transport, and transports version to be set.
+        Initialize the ClientConfig object.
+        This causes the state location, managed transport, and transports version to be set.
         """
 
         Config.__init__(self)
@@ -49,8 +49,8 @@ class ClientConfig(Config):
         optArgs,
         ):
         """
-            Write a message to stdout specifying a supported transport
-            Takes: str, int, (str, int), [str], [str]
+        Write a message to stdout specifying a supported transport
+        Takes: str, int, (str, int), [str], [str]
         """
 
         methodLine = 'CMETHOD %s socks%s %s:%s' % (name, socksVersion,
@@ -63,8 +63,8 @@ class ClientConfig(Config):
 
     def writeMethodError(self, name, message):  # CMETHOD-ERROR
         """
-            Write a message to stdout specifying that an error occurred setting up the specified method
-            Takes: str, str
+        Write a message to stdout specifying that an error occurred setting up the specified method
+        Takes: str, str
         """
 
         self.emit('CMETHOD-ERROR %s %s' % (name, message))

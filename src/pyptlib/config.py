@@ -13,10 +13,10 @@ __docformat__ = 'restructuredtext'
 
 
 class Config:
-"""
+    """
     The Config module class a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
     This class contains the parts of the API which are shared by both client and server implementations of the protocol.
-"""
+    """
     stateLocation = None  # TOR_PT_STATE_LOCATION
     managedTransportVer = []  # TOR_PT_MANAGED_TRANSPORT_VER
     transports = []  # TOR_PT_SERVER_TRANSPORTS or TOR_PT_CLIENT_TRANSPORTS

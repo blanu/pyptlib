@@ -14,10 +14,10 @@ __docformat__ = 'restructuredtext'
 
 
 class ServerConfig(Config):
-"""
+    """
     The ServerConfig class contains a low-level API which closely follows the Tor Proposal 180: Pluggable transports for circumvention.
     This class inherits from pyptlib.config.Config and contains just the parts of the API which are specific to the client implementations of the protocol.
-"""
+    """
     extendedServerPort = None  # TOR_PT_EXTENDED_SERVER_PORT
     ORPort = None  # TOR_PT_ORPORT
     serverBindAddr = {}  # TOR_PT_SERVER_BINADDR
@@ -84,15 +84,15 @@ class ServerConfig(Config):
             self.emit('SMETHOD %s %s:%s' % (name, address[0], address[1]))
 
     def writeMethodError(self, name, message):  # SMETHOD-ERROR
-    """
-        Write a message to stdout specifying that an error occurred setting up the specified method
-        Takes: str, str
-    """
+        """
+            Write a message to stdout specifying that an error occurred setting up the specified method
+            Takes: str, str
+        """
 
         self.emit('SMETHOD-ERROR %s %s' % (name, message))
 
     def writeMethodEnd(self):  # SMETHODS DONE
-    """ Write a message to stdout specifying that the list of supported transports has ended """
+        """ Write a message to stdout specifying that the list of supported transports has ended """
         self.emit('SMETHODS DONE')
 
 
