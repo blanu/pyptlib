@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+""" The pyptlib.easy.client module includes a convenient API for writing pluggable transport clients. """
+
 from pyptlib.config import EnvException
 from pyptlib.client import ClientConfig
 

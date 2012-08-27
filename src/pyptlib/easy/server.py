@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+""" The pyptlib.easy.server module includes a convenient API for writing pluggable transport servers. """
+
 from pyptlib.config import EnvException
 from pyptlib.server import ServerConfig
 

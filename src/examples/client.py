@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+""" This is an example client which shows how to call the pyptlib.easy high-level API. """
+
 from pyptlib.easy.client import init, reportSucess, reportFailure, \
     reportEnd
 
