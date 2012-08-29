@@ -3,7 +3,7 @@
 
 """ This is an example server which shows how to call the pyptlib.easy high-level API. """
 
-from pyptlib.easy.server import init, reportSucess, reportFailure, \
+from pyptlib.easy.server import init, reportSuccess, reportFailure, \
     reportEnd
 
 

@@ -3,7 +3,7 @@
 
 """ This is an example client which shows how to call the pyptlib.easy high-level API. """
 
-from pyptlib.easy.client import init, reportSucess, reportFailure, \
+from pyptlib.easy.client import init, reportSuccess, reportFailure, \
     reportEnd
 
 
