@@ -34,9 +34,11 @@ def init(transports):
 
     return matchedTransports
 
+
 def getORPort():
     config = ServerConfig()
     return config.ORPort
+
 
 def reportSuccess(name, address, options):
     """
