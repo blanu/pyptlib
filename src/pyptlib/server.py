@@ -36,7 +36,9 @@ class ServerConfig(Config):
 
         self.extendedServerPort = self.get('TOR_PT_EXTENDED_SERVER_PORT'
                 )
-        self.ORPort = self.get('TOR_PT_ORPORT')
+        orport = self.get('TOR_PT_ORPORT').split(':')
+	orport[1]=int(orport[1])
+	self.ORPort=orport
 
         binds = self.get('TOR_PT_SERVER_BINDADDR').split(',')
         for bind in binds:
